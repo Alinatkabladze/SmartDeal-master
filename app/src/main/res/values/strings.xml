@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Smart Deal</string>
+    <string name="facebook_application_id" translatable="false">2340777299543799</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb2340777299543799</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="about">From now SmartDeal will help you to make good shopping.
+        You will always be aware of the discounts of famous stores in the city.
+        Our partners are in demand shopping stores like Zara,Mango,United Colors of Benetton,
+        Geox,Ecco,Georgian Designer Corner,Kaba,etc.
+        In addition, the application allows you to collect more benefits by collecting shopping.
+        You can find any information you like of the shopping with our Community.Have a nice shopping!</string>
+    <string name="community_title">Kaba</string>
+    <string name="community_description">Can you tell me if I can find shoes or bags in this store as well?</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="product_title">Product Title</string>
+    <string name="product_submit">Submit</string>
+    <string name="share_btn">Share</string>
+
+</resources>
