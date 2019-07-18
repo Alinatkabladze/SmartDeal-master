@@ -19,9 +19,13 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import org.jetbrains.anko.uiThread
 import java.net.URL
+import java.util.ArrayList
 
 class MainFragment : Fragment() {
 
+    companion object {
+        var products: MutableList<Product> = ArrayList()
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_main, container, false)
 
@@ -31,11 +35,14 @@ class MainFragment : Fragment() {
 
             uiThread {
                 d("alina", "json: $json")
-                val products = Gson().fromJson(json, Array<Product>::class.java).toList()
+
+                products = Gson().fromJson(json, Array<Product>::class.java).toMutableList()
+
+                MainActivity.displayList.addAll(products)
 
                 root.recycler_view.apply {
                     layoutManager = GridLayoutManager(activity, 2)
-                    adapter = ProductsAdapter(products)
+                    recycler_view.adapter = ProductsAdapter(MainActivity.displayList)
                     root.progressBar.visibility = View.GONE
                 }
 

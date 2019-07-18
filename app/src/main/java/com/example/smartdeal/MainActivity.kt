@@ -24,6 +24,7 @@ import com.example.smartdeal.database.ProductFromDatabase
 import com.example.smartdeal.model.Product
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_woman.*
 import kotlinx.android.synthetic.main.menu.*
 import org.jetbrains.anko.doAsync
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var displayList: MutableList<Product> = ArrayList()
+
     }
 
     val My_Request_Code: Int = 7117
@@ -172,21 +174,32 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
+                /*      searchView.clearFocus()
                 searchView.setQuery("", false)
                 searchItem.collapseActionView()
-                Toast.makeText(this@MainActivity, "Looking for $query", Toast.LENGTH_LONG).show()
+               // Toast.makeText(this@MainActivity, "Looking for $query", Toast.LENGTH_LONG).show()*/
                 return true
             }
 
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return false
+                displayList.clear()
+                if (newText!!.isNotEmpty()) {
+                    val search = newText.toLowerCase()
+                    MainFragment.products.forEach {
+                        if (it.toString().toLowerCase().contains(search)) {
+                            displayList.add(it)
+                        }
+                    }
+                } else {
+                    displayList.addAll(MainFragment.products)
+                }
+                recycler_view.adapter?.notifyDataSetChanged()
+                return true
             }
 
         })
         return super.onCreateOptionsMenu(menu)
     }
-
 
 }
