@@ -36,12 +36,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val title = remoteMessage.notification!!.title
             val body = remoteMessage.notification!!.body
             var url: String? = ""
-            if (remoteMessage!!.data != null)
+            if (remoteMessage.data != null)
                 url = remoteMessage.data["image"]
 
             if (!TextUtils.isEmpty(url)) {
                 val finalUrl = url
-                Handler(Looper.getMainLooper()).post{
+                Handler(Looper.getMainLooper()).post {
                     Picasso.get()
                         .load(finalUrl)
                         .placeholder(R.mipmap.ic_launcher_round)
@@ -60,7 +60,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                                     title,
                                     body,
                                     null,
-                                    bitmap)
+                                    bitmap
+                                )
                             }
 
 
@@ -69,19 +70,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
                 }
 
+            } else {
+                showNotification(this@MyFirebaseMessagingService, title, body, null, null)
             }
-            else {
-                showNotification(this@MyFirebaseMessagingService,title,body,null,null)
-            }
-        }
-        else{
+        } else {
             val title = remoteMessage.data["title"]
             val body = remoteMessage.data["body"]
-            var url: String?=remoteMessage.data["image"]
+            var url: String? = remoteMessage.data["image"]
 
             if (!TextUtils.isEmpty(url)) {
                 val finalUrl = url
-                Handler(Looper.getMainLooper()).post{
+                Handler(Looper.getMainLooper()).post {
                     Picasso.get()
                         .load(finalUrl)
                         .placeholder(R.mipmap.ic_launcher_round)
@@ -100,7 +99,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                                     title,
                                     body,
                                     null,
-                                    bitmap)
+                                    bitmap
+                                )
                             }
 
 
@@ -109,9 +109,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
                 }
 
-            }
-            else {
-                showNotification(this@MyFirebaseMessagingService,title,body,null,null)
+            } else {
+                showNotification(this@MyFirebaseMessagingService, title, body, null, null)
             }
         }
     }

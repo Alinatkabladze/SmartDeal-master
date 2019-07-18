@@ -17,7 +17,6 @@ import com.example.smartdeal.model.Product
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
-import org.jetbrains.anko.support.v4.uiThread
 import org.jetbrains.anko.uiThread
 import java.net.URL
 
@@ -25,6 +24,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_main, container, false)
+
 
         doAsync {
             val json = URL("https://api.myjson.com/bins/rpwsb").readText()
@@ -38,36 +38,37 @@ class MainFragment : Fragment() {
                     adapter = ProductsAdapter(products)
                     root.progressBar.visibility = View.GONE
                 }
+
             }
 
         }
 
-       /* doAsync {
+        /* doAsync {
 
-            val db = Room.databaseBuilder(
-                activity!!.applicationContext,
-                AppDatabase::class.java, "database-name"
-            ).build()
+             val db = Room.databaseBuilder(
+                 activity!!.applicationContext,
+                 AppDatabase::class.java, "database-name"
+             ).build()
 
-            val productsFromDatabase=db.productDao().getAll()
+             val productsFromDatabase=db.productDao().getAll()
 
-            val products=productsFromDatabase.map {
-            Product(
-                it.title,
-                "@mipmap/ic_launcher.png",
-                it.discount,
-                false
-            )
-            }
+             val products=productsFromDatabase.map {
+             Product(
+                 it.title,
+                 "@mipmap/ic_launcher.png",
+                 it.discount,
+                 false
+             )
+             }
 
-            uiThread {
-                root.recycler_view.apply {
-                    layoutManager = GridLayoutManager(activity, 2)
-                    adapter = ProductsAdapter(products)
-                    root.progressBar.visibility = View.GONE
-                }
-            }
-        }*/
+             uiThread {
+                 root.recycler_view.apply {
+                     layoutManager = GridLayoutManager(activity, 2)
+                     adapter = ProductsAdapter(products)
+                     root.progressBar.visibility = View.GONE
+                 }
+             }
+         }*/
 
 
         val categories =

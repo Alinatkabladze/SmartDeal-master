@@ -14,29 +14,23 @@ class ProductDetails : AppCompatActivity() {
         setContentView(R.layout.product_details)
         setSupportActionBar(toolbar)
 
-        val title=intent.getStringExtra("title")
-        val photoUrl=intent.getStringExtra("photo_url")
+        val title = intent.getStringExtra("title")
+        val photoUrl = intent.getStringExtra("photo_url")
 
-        product_name.text=title
+        product_name.text = title
         Picasso.get().load(photoUrl).into(photo)
 
-       /* availability.setOnClickListener {
-            AlertDialog.Builder(this)
-                .setMessage("$title Offer is Valid")
-                .setPositiveButton("OK") { dialog, which -> }.create().show()
+        btnShareToOtherApps.setOnClickListener {
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT, title)
+            intent.type = "text/plain"
 
-                }*/
-        btnShareToOtherApps.setOnClickListener{
-            val intent= Intent()
-            intent.action=Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,title)
-            intent.type="text/plain"
-
-            startActivity(Intent.createChooser(intent,"Share"))
+            startActivity(Intent.createChooser(intent, "Share"))
 
         }
 
-        }
+    }
 
 
 }
